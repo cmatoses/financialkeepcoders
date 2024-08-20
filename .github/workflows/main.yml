@@ -20,7 +20,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install --force-reinstall -r requirements.txt
 
     - name: Install Java (required for Spark)
       run: |
@@ -29,8 +29,11 @@ jobs:
 
     - name: Install Spark
       run: |
-        sudo apt-get install -y spark
-
+        # Download the Spark package from GitHub Releases
+        wget https://github.com/cmatoses/financialkeepcoders/releases/tag/spark
+        tar xvf spark-3.5.2-bin-hadoop3.tgz
+        echo "$(pwd)/spark-3.5.2-bin-hadoop3/bin" >> $GITHUB_PATH
+        
     - name: bronze_ticker_data
       run: |
         python bronze_ticker_data.py
