@@ -77,8 +77,8 @@ def get_unique_tickers():
     import yahoo_fin.stock_info as si
 
     # Obtener todos los tickers de los índices especificados
-    tickers_dow = si.tickers_dow()
-    #tickers_sp500 = si.tickers_sp500()
+    # tickers_dow = si.tickers_dow()
+    tickers_sp500 = si.tickers_sp500()
     #tickers_nasdaq = si.tickers_nasdaq()
     
     # Combinar todos los tickers en una sola lista
@@ -86,7 +86,7 @@ def get_unique_tickers():
     
     # Eliminar duplicados pero mantener el primer encuentro
     # unique_tickers = list(dict.fromkeys(combined_tickers))
-    unique_tickers = list(dict.fromkeys(tickers_dow))
+    unique_tickers = list(dict.fromkeys(tickers_sp500))
 
     
     # Crear un DataFrame con los tickers únicos
