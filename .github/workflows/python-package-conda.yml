@@ -28,16 +28,16 @@ jobs:
       
     - name: Run bronze_ticker_data
       run: |
-        python bronze_ticker_data.py
+        python bronze_ticker_data.ipynb
   
     - name: Run bronze_sp500_tickers
       run: |
-        python bronze_sp500_tickers.py
+        python bronze_sp500_tickers.ipynb
 
     - name: Run silver_currency_data
       run: |
-        python silver_currency_data.py
+        python silver_currency_data.ipynb
   
     - name: Run gold_main_sp500
       run: |
-        python gold_main_sp500.py
+        python gold_main_sp500.ipynb
