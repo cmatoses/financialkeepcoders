@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.8.19
+    - name: Set up Python 3.8.18
       uses: actions/setup-python@v3
       with:
-        python-version: '3.8.19'
+        python-version: '3.8.18'
 
     - name: Install dependencies
       run: |
