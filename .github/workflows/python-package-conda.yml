@@ -19,7 +19,7 @@ jobs:
 
     - name: Add conda to system path
       run: |
-        echo "::add-path::${{ steps.miniconda.outputs.conda-path }}"
+          echo "$HOME/miniconda/bin" >> $GITHUB_PATH
 
     - name: Update conda environment
       run: |
