@@ -35,6 +35,21 @@ class BigQueryUtils:
         return query_job.to_dataframe()
     
 
+    def select_for_incremental(id:str, table:str, new_df:pd.DataFrame):
+        current_df = bigquery.run_query(
+            f"""
+            SELECT
+                {id} 
+            FROM {table} 
+            """
+            )
+        
+        # Filtrar los registros que no están en existing_df
+        df_incremental = new_df[~new_df[{id}].isin(current_df[{id}])]
+
+        return df_incremental
+    
+
     def save_dataframe(self, df:pd.DataFrame, project_id:str, dataset:str, table:str, if_exists, schema)-> None:
         """Function to save and create the table if it's necessary to load data in BigQuery
 
@@ -65,7 +80,16 @@ class BigQueryUtils:
                 credentials=self.credentials,
                 chunksize = 10000
             )
-                
+
+# Generate a unique ID by hashing the concatenated values of specified fields
+def generate_id(row, fields):
+    import hashlib
+
+    concatenated = ''.join([str(row[field]) for field in fields])
+    
+    return hashlib.md5(concatenated.encode()).hexdigest()
+
+
 # Obtener todos los tickers de los distintos mercados
 def get_unique_tickers():
     """
@@ -137,27 +161,30 @@ def last_date_by_ticker_saved(max_date_by_ticker, bigquery, table_conca):
     # Retrieve data from BigQuery
     import pandas as pd
 
-    current_data = bigquery.run_query(
+    max_date_by_ticker = bigquery.run_query(
         f"""
         SELECT
-            * 
+            ticker,
+            max(date) as date 
         FROM {table_conca} 
+        GROUP BY 
+            ticker
         """
     )
     
     # Convertir todas las fechas a tz-naive (sin zona horaria)
-    current_data['date'] = current_data['date'].dt.tz_localize(None)
+    # max_date_by_ticker['date'] = max_date_by_ticker['date'].dt.tz_localize(None)
     
     # Obtener la fecha máxima por ticker
-    query_ticker = current_data.groupby('ticker')['date'].max().reset_index()
-    query_ticker['date'] = pd.to_datetime(query_ticker['date'])
+    # max_date_by_ticker = current_data.groupby('ticker')['date'].max().reset_index()
+    max_date_by_ticker['date'] = pd.to_datetime(max_date_by_ticker['date'])
     
     # Mergear con el DataFrame de tickers únicos
-    max_date_by_ticker = pd.merge(max_date_by_ticker, query_ticker, how='inner', on='ticker')
-    max_date_by_ticker['date'] = max_date_by_ticker[['date', 'initial_date']].max(axis=1)
-    
-    # Eliminar la columna auxiliar 'initial_date'
-    max_date_by_ticker.drop(columns=['initial_date'], inplace=True)
+    # max_date_by_ticker = pd.merge(max_date_by_ticker, query_ticker, how='left', on='ticker')
+    # max_date_by_ticker['date'] = max_date_by_ticker[['date', 'initial_date']].max(axis=1)
+    # 
+    # # Eliminar la columna auxiliar 'initial_date'
+    # max_date_by_ticker.drop(columns=['initial_date'], inplace=True)
     
     return max_date_by_ticker
 
