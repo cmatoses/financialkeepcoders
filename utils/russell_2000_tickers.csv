@@ -1,4 +1,4 @@
-Ticker,Name,Sector,Price,Dividend Yield,5-Year Average Dividend Yield,Dividends Per Share (TTM),Market Cap ($M),Trailing P/E Ratio,Payout Ratio,Beta,52-Week High,52-Week Low
+ticker,Name,Sector,Price,Dividend Yield,5-Year Average Dividend Yield,Dividends Per Share,Market Cap,Trailing PE Ratio,Payout Ratio,Beta,52 Week High,52 Week Low
 AADI,"Aadi Bioscience, Inc.",N/A,$1.58,0.0%,0.0%,$0.00,$39,N/A,0.0%,2.38,$7.24,$1.21
 AAN,"Aaron's Company, Inc.",Industrials,$10.07,5.0%,3.2%,$0.50,$309,N/A,N/A,1.22,$11.73,$6.42
 AAON,"AAON, INC.",Industrials,$94.54,0.0%,0.3%,$0.32,"$7,660",41.1,14.2%,1.03,$96.23,$52.07
