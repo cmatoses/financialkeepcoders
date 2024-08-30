@@ -35,19 +35,20 @@ class BigQueryUtils:
         return query_job.to_dataframe()
     
 
-    def select_for_incremental(id:str, table:str, new_df:pd.DataFrame):
-        current_df = bigquery.run_query(
+    def select_for_incremental(self, id: str, table: str, new_df: pd.DataFrame) -> pd.DataFrame:
+        current_df = self.run_query(
             f"""
             SELECT
                 {id} 
-            FROM {table} 
+            FROM {table}
             """
-            )
-        
-        # Filtrar los registros que no están en existing_df
-        df_incremental = new_df[~new_df[{id}].isin(current_df[{id}])]
+        )
+
+        # Filtrar los registros que no están en current_df
+        df_incremental = new_df[~new_df[id].isin(current_df[id])]
 
         return df_incremental
+    
     
 
     def save_dataframe(self, df:pd.DataFrame, project_id:str, dataset:str, table:str, if_exists, schema)-> None:
@@ -207,6 +208,7 @@ def fetch_historical_data(max_date_by_ticker, ticker_col='ticker', start_date_co
     import yahoo_fin.stock_info as si
 
     data = []
+    error_tickers = []
 
     for _, row in max_date_by_ticker.iterrows():
         ticker = row[ticker_col]
@@ -224,11 +226,15 @@ def fetch_historical_data(max_date_by_ticker, ticker_col='ticker', start_date_co
             print(f"Datos obtenidos para {ticker}.")
         except Exception as e:
             print(f"Error al obtener datos para {ticker}: {e}")
+            # Añadir el ticker y el error al DataFrame de errores
+            error_tickers.append({'ticker': ticker, 'error': str(e)})
 
     # Concatenar todos los DataFrames en uno solo
     df = pd.concat(data, ignore_index=True)
+    df_errors = pd.DataFrame(error_tickers)
+
+    return df, df_errors    
     
-    return df
 
 
 
