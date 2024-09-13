@@ -12,5 +12,6 @@ tensorflow==2.16.2
 torch==2.2.2
 tqdm==4.66.5
 yfinance==0.2.41
-
-
+TA-Lib==0.4.32
+transformers==4.33.0
+scikit-learn==1.5.1
