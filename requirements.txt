@@ -4,7 +4,6 @@ matplotlib==3.9.2
 nltk==3.8.2
 numpy==1.23.5
 pandas==2.2.2
-ply==3.11
 scikeras==0.13.0
 seaborn==0.13.2
 statsmodels==0.14.2
