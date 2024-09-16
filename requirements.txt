@@ -14,3 +14,4 @@ yfinance==0.2.41
 TA-Lib==0.4.32
 transformers==4.33.0
 scikit-learn==1.5.1
+python-dotenv==1.0.1
