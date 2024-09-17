@@ -91,35 +91,6 @@ def generate_id(row, fields):
     return hashlib.md5(concatenated.encode()).hexdigest()
 
 
-# Obtener todos los tickers de los distintos mercados
-def get_unique_tickers():
-    """
-    Obtener todos los tickers de los distintos mercados
-
-    Returns:
-        Dataframe con la columna tickers y sus valores
-    """
-    import yahoo_fin.stock_info as si
-
-    # Obtener todos los tickers de los índices especificados
-    # tickers_dow = si.tickers_dow()
-    tickers_sp500 = si.tickers_sp500()
-    #tickers_nasdaq = si.tickers_nasdaq()
-    
-    # Combinar todos los tickers en una sola lista
-    # combined_tickers = tickers_dow + tickers_sp500 + tickers_nasdaq
-    
-    # Eliminar duplicados pero mantener el primer encuentro
-    # unique_tickers = list(dict.fromkeys(combined_tickers))
-    unique_tickers = list(dict.fromkeys(tickers_sp500))
-
-    
-    # Crear un DataFrame con los tickers únicos
-    unique_tickers = pd.DataFrame(unique_tickers, columns=['ticker'])
-    
-    return unique_tickers
-
-
 def initial_date_by_ticker(unique_tickers, initial_date='2015-01-01'):
     """
     Añade una columna de fecha inicial a un DataFrame de tickers.
@@ -173,19 +144,8 @@ def last_date_by_ticker_saved(max_date_by_ticker, bigquery, table_conca):
         """
     )
     
-    # Convertir todas las fechas a tz-naive (sin zona horaria)
-    # max_date_by_ticker['date'] = max_date_by_ticker['date'].dt.tz_localize(None)
-    
-    # Obtener la fecha máxima por ticker
     # max_date_by_ticker = current_data.groupby('ticker')['date'].max().reset_index()
     max_date_by_ticker['date'] = pd.to_datetime(max_date_by_ticker['date'])
-    
-    # Mergear con el DataFrame de tickers únicos
-    # max_date_by_ticker = pd.merge(max_date_by_ticker, query_ticker, how='left', on='ticker')
-    # max_date_by_ticker['date'] = max_date_by_ticker[['date', 'initial_date']].max(axis=1)
-    # 
-    # # Eliminar la columna auxiliar 'initial_date'
-    # max_date_by_ticker.drop(columns=['initial_date'], inplace=True)
     
     return max_date_by_ticker
 
@@ -236,8 +196,6 @@ def fetch_historical_data(max_date_by_ticker, ticker_col='ticker', start_date_co
     return df, df_errors    
     
 
-
-
 def process_and_save_joins(df, max_date_by_ticker, bigquery, project, dataset, table):
     """
     Realiza LEFT JOIN e INNER JOIN entre dos DataFrames y guarda los resultados en BigQuery.
@@ -272,32 +230,3 @@ def process_and_save_joins(df, max_date_by_ticker, bigquery, project, dataset, t
     result = left_join[~left_join_tuples.isin(inner_join_tuples)]
 
     return result
-
-
-
-
-
-#   # Creating table in Bigquery
-#    def create_table(key_path, project_id, dataset_id, table_id, schema):
-#        try:
-#            # Configura las credenciales y crea una instancia del cliente BigQuery
-#            credentials, client = gcp_auth(key_path, project_id)   
-#
-#            # Define el nombre completo de la tabla
-#            table_ref = client.dataset(dataset_id).table(table_id)
-#
-#            # Verifica si la tabla ya existe
-#            try:
-#                client.get_table(table_ref)
-#                print(f"La tabla {table_id} ya existe en el dataset {dataset_id}.")
-#            except NotFound:
-#                # Configura la tabla con su esquema
-#                table = bigquery.Table(table_ref, schema=schema)
-#                
-#                # Crea la tabla en BigQuery
-#                table = client.create_table(table)
-#                print(f"Tabla {table.table_id} creada en el dataset {dataset_id}.")
-#
-#        except Exception as e:
-#            # Manejo de errores
-#            print(f"Error durante la creación de la tabla: {e}")
