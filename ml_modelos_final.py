@@ -1736,19 +1736,6 @@ def backtesting_estrategia_regresion(df_test, predicciones, initial_cash=10000):
     return portfolio_value, cumulative_return
 
 
-def estrategia_buy_and_hold(df_test, initial_cash=10000):
-    """
-    Simulamos la estrategia Buy and Hold.
-    """
-    buy_and_hold_holdings = initial_cash / df_test['Close'].iloc[0]
-    buy_and_hold_final_value = buy_and_hold_holdings * \
-        df_test['Close'].iloc[-1]
-    buy_and_hold_cumulative_return = (
-        buy_and_hold_final_value - initial_cash) / initial_cash
-
-    return buy_and_hold_holdings, buy_and_hold_final_value, buy_and_hold_cumulative_return
-
-
 def evaluar_modelos_regresion(modelos, df_test, X_test_scaled_, ticker_test, initial_cash=10000):
     """
     Evaluamos todos los modelos de regresión, realizamos backtesting y comparamos el rendimiento.
