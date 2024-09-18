@@ -23,7 +23,7 @@ El flujo de trabajo incluye la descarga de datos de BigQuery, el preprocesamient
 
 ---
 
-### Puntos clave del proyecto
+### Puntos clave del proyecto a nivel de modelado
 
 1. **Preprocesamiento de datos**
    - Carga de datos desde Google BigQuery o un archivo CSV local, según disponibilidad. Este es el directorio en Drive con el archivo .csv principal: [Enlace al archivo .csv](https://drive.google.com/drive/folders/1IdonUB38UQC8TSGIrdPwrMCv5eThVB5d?usp=sharing)
