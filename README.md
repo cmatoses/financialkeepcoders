@@ -26,7 +26,7 @@ El flujo de trabajo incluye la descarga de datos de BigQuery, el preprocesamient
 ### Puntos clave del proyecto
 
 1. **Preprocesamiento de datos**
-   - Carga de datos desde Google BigQuery o un archivo CSV local, según disponibilidad. Este es el directorio en Drive con el archivo .csv principal: [Enlace al archivo .csv] (https://drive.google.com/drive/folders/1IdonUB38UQC8TSGIrdPwrMCv5eThVB5d?usp=sharing)
+   - Carga de datos desde Google BigQuery o un archivo CSV local, según disponibilidad. Este es el directorio en Drive con el archivo .csv principal: [Enlace al archivo .csv](https://drive.google.com/drive/folders/1IdonUB38UQC8TSGIrdPwrMCv5eThVB5d?usp=sharing)
 Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQuery, el código comprobará si el archivo está en la carpeta o no.
    - Filtrado de tickers por volumen, sector y cluster.
    - Normalización y escalado de las características mediante `MinMaxScaler`.
@@ -64,7 +64,7 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
       - Correr los modelos predictivos de manera sencilla, facilitando la integración de este sistema con otras aplicaciones o procesos.
       - Acceder a los resultados del backtesting y las predicciones, obteniendo el mejor modelo y la predicción para el día siguiente.
 
-#### Cómo Ejecutar la Aplicación Flask
+#### Cómo ejecutar la aplicación Flask
 
 1. **Clonar el repositorio**:
    ```bash
