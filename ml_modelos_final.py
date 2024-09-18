@@ -34,6 +34,30 @@ warnings.filterwarnings('ignore')
 # Cargamos las variables del archivo .env
 load_dotenv('variables.env')
 
+# Conexión a BigQuery
+from google.cloud import bigquery
+from google.oauth2 import service_account
+from google.cloud import bigquery
+from google.cloud.exceptions import NotFound
+from utils.utils_bigquery import *
+
+key_path = key_path
+project = project_id
+dataset = 'gold'
+table = 'gold_main_sp500'
+table_conca = f'{project}.{dataset}.{table}'
+
+bigquery = BigQueryUtils(key_path)
+
+df = bigquery.run_query(
+    f"""
+    SELECT
+        *
+    FROM {project}.{dataset}.{table}
+    """
+)
+df.to_csv('./gold_main.csv') # Guardamos el csv para trabajar de forma más ágil con él
+
 
 def load_data():
     """Cargamos los datos del CSV y eliminamos la primera columna."""
@@ -731,7 +755,7 @@ def scale_data_classification(X_train, X_test, y_train, y_test, df_train, df_tes
     return X_train_scaled_, X_test_scaled_, y_test
 
 
-# Función de Walk-Forward Validation
+# Función de Walk-Forward Validation (muy usada en series temporales financieras)
 def walk_forward_validation(X, y, initial_train_size, step_size):
     """
     Aplica validación walk-forward, donde el conjunto de entrenamiento se incrementa progresivamente y el conjunto de prueba
@@ -1832,8 +1856,10 @@ if __name__ == '__main__':
     # random.seed(42)
     problem = validate_problem_type()
     print(f"Problema seleccionado: {problem}")
-
+    
+    # Carga de datos
     df = load_data()
+    
     # Verificamos si "tickers_random" tiene acciones en el archivo .env
     tickers_random_str = str(os.environ['tickers_random'])
     tickers_random = eval(tickers_random_str)
@@ -1880,7 +1906,7 @@ if __name__ == '__main__':
     # Mostramos el resultado final junto a las noticias
     print(final_df.tail())
 
-    # Dividimos el conjunto de datos en entrenamiento y prueba
+    # Dividimos el conjunto de datos en entrenamiento y prueba y procesamos por separado
     train, test = split_train_test(final_df, tickers_random)
     tickers_train = tickers_random[:-1]
     ticker_test = tickers_random[-1]
@@ -1956,7 +1982,9 @@ if __name__ == '__main__':
         f"Forma de X_test_combined después de reshape: {X_test_combined_reshaped.shape}")
     print(f"Forma de y_test_combined: {y_test_combined.shape}")
 
-    # Preguntamos al usuario si desea realizar las predicciones para la salida web
+    ## Modelos y Backtesting
+    
+    # Preguntamos al usuario si desea realizar las predicciones desde cero, o podemos cargar modelos preentrenados previamente
     hacer_predicciones = input(
         "¿Deseas hacer las predicciones de {ticker_test}? (si/no): ").strip().lower()
 
