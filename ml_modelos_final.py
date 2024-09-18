@@ -1915,12 +1915,12 @@ if __name__ == '__main__':
     y_train_splits = {}
 
     if problem == 'clasificacion':
-        save_train_test(train, test, train_filename='train_classification.csv',
-                        test_filename='test_classification.csv')
+        save_train_test(train, test, train_filename='./train_classification.csv',
+                        test_filename='./test_classification.csv')
         df_train = process_data(pd.read_csv(
-            'train_classification.csv', sep=';', decimal='.'), df_name="df_train")
+            './train_classification.csv', sep=';', decimal='.'), df_name="df_train")
         df_test = process_data(pd.read_csv(
-            'test_classification.csv', sep=';', decimal='.'), df_name="df_test")
+            './test_classification.csv', sep=';', decimal='.'), df_name="df_test")
         X_train, y_train, X_test, y_test = split_data_classification(
             df_train, df_test)
         check_class_balance(y_train, y_test)
@@ -1933,11 +1933,11 @@ if __name__ == '__main__':
 
     elif problem == 'regresion':
         save_train_test(
-            train, test, train_filename='train_regression.csv', test_filename='test_regression.csv')
+            train, test, train_filename='./train_regression.csv', test_filename='./test_regression.csv')
         df_train = process_data(pd.read_csv(
-            'train_regression.csv', sep=';', decimal='.'), df_name="df_train")
+            './train_regression.csv', sep=';', decimal='.'), df_name="df_train")
         df_test = process_data(pd.read_csv(
-            'test_regression.csv', sep=';', decimal='.'), df_name="df_test")
+            './test_regression.csv', sep=';', decimal='.'), df_name="df_test")
         X_train, y_train, X_test, y_test = split_data_regression(
             df_train, df_test)
         X_train_scaled_, X_test_scaled_, y_train_scaled_, y_test_scaled_, scaler_y_test = scale_data_regression(
@@ -2009,9 +2009,9 @@ if __name__ == '__main__':
             )
             # Eliminamos Conv1D directamente por malos resultados
             modelos = {
-                f'RF - Clasificación - {ticker_test}': ('', 'rf_model_classification.pkl'),
-                f'Gru - Clasificación - {ticker_test}': ('gru_model_classification.h5', ''),
-                f'LSTM+RF - Clasificación - {ticker_test}': ('lstm_model_hybrid_classification.h5', 'random_forest_lstm_hybrid_classification.pkl')
+                f'RF - Clasificación - {ticker_test}': ('', './rf_model_classification.pkl'),
+                f'Gru - Clasificación - {ticker_test}': ('./gru_model_classification.h5', ''),
+                f'LSTM+RF - Clasificación - {ticker_test}': ('./lstm_model_hybrid_classification.h5', './random_forest_lstm_hybrid_classification.pkl')
             }
 
             # Evaluamos los modelos y obtenemos el mejor
@@ -2042,9 +2042,9 @@ if __name__ == '__main__':
             )
             # Eliminamos GRU+RF directamente por malos resultados
             modelos = {
-                f'GRU - Regresión - {ticker_test}': ('gru_model_regression.h5', ''),
-                f'LSTM - Regresión - {ticker_test}': ('lstm_model_regression.h5', ''),
-                f'RF - Regresión - {ticker_test}': ('', 'rf_model_regression.pkl'),
+                f'GRU - Regresión - {ticker_test}': ('./gru_model_regression.h5', ''),
+                f'LSTM - Regresión - {ticker_test}': ('./lstm_model_regression.h5', ''),
+                f'RF - Regresión - {ticker_test}': ('', './rf_model_regression.pkl'),
             }
 
             # Evaluamos los modelos de regresión
@@ -2060,9 +2060,9 @@ if __name__ == '__main__':
         # Si el usuario elige "no", cargamos los modelos guardados y ejecutamos solo el backtesting
         if problem == 'clasificacion':
             modelos = {
-                f'RF - Clasificación - {ticker_test}': ('', 'rf_model_classification_EXPO.pkl'),
-                f'GRU - Clasificación - {ticker_test}': ('gru_model_classification_EXPO.h5', ''),
-                f'LSTM+RF - Clasificación - {ticker_test}': ('lstm_model_hybrid_classification_EXPO.h5', 'random_forest_lstm_hybrid_classification_EXPO.pkl')
+                f'RF - Clasificación - {ticker_test}': ('', './rf_model_classification_EXPO.pkl'),
+                f'GRU - Clasificación - {ticker_test}': ('./gru_model_classification_EXPO.h5', ''),
+                f'LSTM+RF - Clasificación - {ticker_test}': ('./lstm_model_hybrid_classification_EXPO.h5', './random_forest_lstm_hybrid_classification_EXPO.pkl')
             }
             best_model, best_portfolio_value_classification, best_buy_and_hold_portfolio_value, best_df_test = evaluar_modelos_clasificacion(
                 modelos, df_test, X_test_scaled_, ticker_test
@@ -2071,9 +2071,9 @@ if __name__ == '__main__':
                                 best_buy_and_hold_portfolio_value, best_df_test)
         elif problem == 'regresion':
             modelos = {
-                f'GRU - Regresión - {ticker_test}': ('gru_model_regression_EXPO.h5', ''),
-                f'LSTM - Regresión - {ticker_test}': ('lstm_model_regression_EXPO.h5', ''),
-                f'RF - Regresión - {ticker_test}': ('', 'rf_model_regression_EXPO.pkl')
+                f'GRU - Regresión - {ticker_test}': ('./gru_model_regression_EXPO.h5', ''),
+                f'LSTM - Regresión - {ticker_test}': ('./lstm_model_regression_EXPO.h5', ''),
+                f'RF - Regresión - {ticker_test}': ('', './rf_model_regression_EXPO.pkl')
             }
             best_model, best_portfolio_value, best_buy_and_hold_value, best_df_test, best_pred_31 = evaluar_modelos_regresion(
                 modelos, df_test, X_test_scaled_, ticker_test
