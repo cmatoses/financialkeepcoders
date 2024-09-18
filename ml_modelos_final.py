@@ -234,7 +234,7 @@ nltk.download('wordnet', quiet=True)
 
 
 def perform_sentiment_analysis(texts):
-    """Analizamos el sentimiento de las noticias usando FinBERT."""
+    """Analizamos el sentimiento de las noticias usando FinBERT como técnica de Transfer Learning.."""
     tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
     model = AutoModelForSequenceClassification.from_pretrained(
         "ProsusAI/finbert")
