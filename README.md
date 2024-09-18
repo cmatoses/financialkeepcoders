@@ -54,6 +54,27 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
 6. **Análisis de sentimiento**
    - Generación de noticias sintéticas mediante NLTK y análisis de sentimiento financiero con FinBERT.
    - Los datos textuales complementan los modelos, añadiendo una dimensión cualitativa al análisis financiero.
+  
+7. **Aplicación Flask**
+   - Hemos añadido valor al proyecto con Flask, convirtiendo el código de algoritmos en una herramienta más accesible e interactiva.
+   - La aplicación **Flask** permite que el proyecto sea más accesible al usuario final mediante una interfaz web simple que interactúa con los modelos y los datos subyacentes. Con Flask, se ha creado una **API** que expone funcionalidades clave del sistema en tiempo real, permitiendo al usuario:
+
+- Ejecutar consultas a BigQuery y/o cargar datos financieros sin interactuar directamente con el código.
+- Seleccionar el sector y cluster que quiere predecir (limitado a 4 acciones), lo que le aporta personalización y flexibilidad a la hora de realizar análisis o predicciones.
+- Correr los modelos predictivos de manera sencilla, facilitando la integración de este sistema con otras aplicaciones o procesos.
+- Acceder a los resultados del backtesting y las predicciones, obteniendo el mejor modelo y la predicción para el día siguiente.
+
+#### Cómo Ejecutar la Aplicación Flask
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/usuario/financial-keepcoders.git
+   cd financial-keepcoders
+   ```
+2. 
+
+
+
 
 ---
 
