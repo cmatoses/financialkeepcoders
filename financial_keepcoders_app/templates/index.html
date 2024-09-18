@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elige el tipo de problema</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% extends "base.html" %}
+    
+    {% block title %}Inicio{% endblock %}
+    
+    {% block content %}
+    <div class="container">
+        <h1>Selecciona el tipo de problema:</h1>
+        <form action="/sector" method="POST">
+            <button type="submit" name="problem" value="clasificacion">Clasificación</button>
+            <button type="submit" name="problem" value="regresion">Regresión</button>
+        </form>
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

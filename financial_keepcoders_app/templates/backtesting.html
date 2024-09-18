@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Backtesting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% extends "base.html" %}
+    
+    {% block title %}Backtesting{% endblock %}
+    
+    {% block content %}
+    <div class="backtesting-container">
+        <h1>Resultados del Backtesting para {{ ticker_test }}</h1>
+    
+        <!-- Mostrar los resultados de las métricas -->
+        <div class="metrics">
+            <h2>Resultados del Modelo:</h2>
+            <ul>
+                {% for result in result_texts %}
+                <li>{{ result }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+        <!-- Mostrar las gráficas generadas -->
+        <div class="charts">
+            <h2>Gráficas de Resultados:</h2>
+    
+            <!-- Aquí las dos primeras gráficas en línea (horizontalmente) -->
+            <div class="graficas-dos-columnas">
+                <div class="grafica">
+                    <img src="data:image/png;base64,{{ graph_urls[0] }}" alt="Gráfico 1" class="backtesting-graph">
+                </div>
+                <div class="grafica">
+                    <img src="data:image/png;base64,{{ graph_urls[1] }}" alt="Gráfico 2" class="backtesting-graph">
+                </div>
+            </div>
+    
+            <!-- La última gráfica se mostrará en su propia fila debajo -->
+            <div class="grafica">
+                <img src="data:image/png;base64,{{ graph_urls[2] }}" alt="Gráfico 3" class="backtesting-graph">
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+
+</body>
+
+</html>

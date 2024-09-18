@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Financial KeepCoders{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <!-- Header section with logo -->
+<header class="header">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Financial KeepCoders Logo" class="logo">
+
+        </a>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer section -->
+    <footer style="text-align: center; margin-top: 20px; padding: 10px; background-color: #f1f1f1;">
+        <p>Financial KeepCoders - Transformando las finanzas con IA</p>
+        <p>Bootcamp Big Data, IA y ML - KeepCoding</p>
+        <p>Carles Matoses Miret & Sara Díaz-P. Martín</p>
+    </footer>
+</body>
+
+</html>
