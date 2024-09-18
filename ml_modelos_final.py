@@ -854,11 +854,11 @@ def train_evaluate_random_forest(train_splits_combined, X_test_scaled_, y_test, 
     y_pred_rf_final = rf_model.predict(X_test_scaled_[ticker_test])
 
     # Evaluamos el modelo en los datos de prueba finales (ticker_test)
-    print("Classification Report Test (Random Forest):")
+    print(f"Classification Report Test - {ticker_test} (Random Forest):")
     print(classification_report(
         y_test[df_test[ticker_test] == 1], y_pred_rf_final))
 
-    print("Confusion Matrix Test (Random Forest):")
+    print(f"Confusion Matrix Test - {ticker_test} (Random Forest):")
     print(confusion_matrix(y_test[df_test[ticker_test] == 1], y_pred_rf_final))
 
     # Guardamos el modelo en un archivo
@@ -947,11 +947,11 @@ def train_evaluate_conv1d(train_splits_combined, X_test_scaled_, y_test, df_test
     y_pred_conv1d = (conv1d_model.predict(X_test_reshaped) > 0.5).astype(int)
 
     # Mostramos el reporte de clasificación y la matriz de confusión
-    print("Classification Report Test (Conv1D):")
+    print(f"Classification Report Test - {ticker_test} (Conv1D):")
     print(classification_report(
         y_test[df_test[ticker_test] == 1], y_pred_conv1d))
 
-    print("Confusion Matrix Test (Conv1D):")
+    print(f"Confusion Matrix Test - {ticker_test} (Conv1D):")
     print(confusion_matrix(y_test[df_test[ticker_test] == 1], y_pred_conv1d))
 
     # Guardamos el modelo en un archivo
@@ -1034,10 +1034,10 @@ def train_evaluate_gru(train_splits_combined, X_test_scaled_, y_test, df_test, t
     y_pred_gru = (gru_model.predict(X_test_reshaped) > 0.5).astype(int)
 
     # Mostramos la matriz de confusión y el classification report para el último ticker
-    print("Confusion Matrix Test (GRU):")
+    print(f"Confusion Matrix Test - {ticker_test} (GRU):")
     print(confusion_matrix(y_test[df_test[ticker_test] == 1], y_pred_gru))
 
-    print("Classification Report Test (GRU):")
+    print(f"Classification Report Test - {ticker_test} (GRU):")
     print(classification_report(y_test[df_test[ticker_test] == 1], y_pred_gru))
 
     # Guardamos el modelo en un archivo
@@ -1133,11 +1133,11 @@ def train_evaluate_lstm_rf(train_splits_combined, X_test_scaled_, y_test, df_tes
         [X_test_scaled_[ticker_test], lstm_test_predictions_final]))
 
     # Imprimimos el reporte de clasificación y la matriz de confusión para el ticker de prueba
-    print("Classification Report Test (LSTM + Random Forest):")
+    print(f"Classification Report Test - {ticker_test} (LSTM + Random Forest):")
     print(classification_report(
         y_test[df_test[ticker_test] == 1], rf_test_predictions_final))
 
-    print("Confusion Matrix Test (LSTM + Random Forest):")
+    print(f"Confusion Matrix Test - {ticker_test} (LSTM + Random Forest):")
     print(confusion_matrix(
         y_test[df_test[ticker_test] == 1], rf_test_predictions_final))
 
@@ -1232,8 +1232,8 @@ def train_evaluate_lstm_regression(train_splits_combined, X_test_scaled_, y_test
     mse_test_final = mean_squared_error(y_test_final, y_pred_test_final)
     r2_test_final = r2_score(y_test_final, y_pred_test_final)
 
-    print(f"MSE en la última acción (LSTM): {mse_test_final:.4f}")
-    print(f"R² en la última acción (LSTM): {r2_test_final:.4f}")
+    print(f"MSE en la última acción - {ticker_test} (LSTM): {mse_test_final:.4f}")
+    print(f"R² en la última acción - {ticker_test} (LSTM): {r2_test_final:.4f}")
 
     # Guardamos el modelo
     model_lstm.save('lstm_model_regression.h5')
@@ -1306,8 +1306,8 @@ def train_evaluate_rf_regression(train_splits_combined, X_test_scaled_, y_test_s
     mse_test_final = mean_squared_error(y_test_final, y_pred_test_final)
     r2_test_final = r2_score(y_test_final, y_pred_test_final)
 
-    print(f"MSE en la última acción (RF): {mse_test_final:.4f}")
-    print(f"R² en la última acción (RF): {r2_test_final:.4f}")
+    print(f"MSE en la última acción - {ticker_test} (RF): {mse_test_final:.4f}")
+    print(f"R² en la última acción - {ticker_test} (RF): {r2_test_final:.4f}")
 
     # Guardamos el modelo entrenado
     joblib.dump(rf_model, 'rf_model_regression.pkl')
@@ -1395,8 +1395,8 @@ def train_evaluate_gru_regression(train_splits_combined, X_test_scaled_, y_test_
     mse_test_final = mean_squared_error(y_test_final, y_pred_test_final)
     r2_test_final = r2_score(y_test_final, y_pred_test_final)
 
-    print(f"MSE en la última acción (GRU): {mse_test_final:.4f}")
-    print(f"R² en la última acción (GRU): {r2_test_final:.4f}")
+    print(f"MSE en la última acción - {ticker_test} (GRU): {mse_test_final:.4f}")
+    print(f"R² en la última acción - {ticker_test} (GRU): {r2_test_final:.4f}")
 
     # Guardamos el modelo GRU
     model_gru.save('gru_model_regression.h5')
@@ -1507,9 +1507,9 @@ def train_evaluate_gru_rf_regression(train_splits_combined, X_test_scaled_, y_te
     r2_test_final_hybrid = r2_score(y_test_final, y_pred_test_final_hybrid)
 
     print(
-        f"MSE en la última acción (Híbrido GRU + Random Forest): {mse_test_final_hybrid:.4f}")
+        f"MSE en la última acción - {ticker_test} (Híbrido GRU + Random Forest): {mse_test_final_hybrid:.4f}")
     print(
-        f"R² en la última acción (Híbrido GRU + Random Forest): {r2_test_final_hybrid:.4f}")
+        f"R² en la última acción - {ticker_test} (Híbrido GRU + Random Forest): {r2_test_final_hybrid:.4f}")
 
     # Guardamos los modelos entrenados
     model_gru.save('gru_model_hybrid_regression.h5')
@@ -1994,7 +1994,7 @@ if __name__ == '__main__':
     
     # Preguntamos al usuario si desea realizar las predicciones desde cero, o podemos cargar modelos preentrenados previamente
     hacer_predicciones = input(
-        "¿Deseas hacer las predicciones de {ticker_test}? (si/no): ").strip().lower()
+        f"¿Deseas hacer las predicciones de {ticker_test}? (si/no): ").strip().lower()
 
     if hacer_predicciones == 'si':
 
