@@ -52,7 +52,7 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
    - Posibilidad de seleccionar tickers de forma aleatoria o manual en el archivo `variables.env`.
 
 6. **Análisis de sentimiento**
-   - Generación de noticias sintéticas mediante NLTK y análisis de sentimiento financiero con FinBERT.
+   - Generación de noticias sintéticas mediante NLTK y análisis de sentimiento financiero con FinBERT. Esto nos ha permitido usar la técnica Transfer Learning.
    - Los datos textuales complementan los modelos, añadiendo una dimensión cualitativa al análisis financiero.
   
 7. **Aplicación Flask**
@@ -102,6 +102,7 @@ python app.py
 - **Ampliación del análisis**: Aumentar el número de tickers simultáneos para mejorar la representatividad.
 - **Optimización de hiperparámetros**: Uso de técnicas automáticas como Grid Search o Bayesian Optimization pueden mejorar el rendimiento (aunque a priori comprobamos que no).
 - **Mejora de la generalización**: Aunque podemos cargar modelos preentrenados, sería bueno poder entrenar un número mayor de acciones para conseguir la ansiada generalización, que a nivel computacional nos ha sido imposible implementar.
+- **Hacer Fine Tuning**: En relación al anterior punto, el siguiente paso podría incluir hacer Fine Tuning con estos modelos preentrenados, donde podamos congelar capas y adaptar los hiperparámetros a nuestro problema para intentar lograr una predicción mejor y, por tanto, generalización.
 
 ---
 
