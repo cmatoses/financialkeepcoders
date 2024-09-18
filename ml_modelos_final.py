@@ -49,22 +49,30 @@ table_conca = f'{project}.{dataset}.{table}'
 
 bigquery = BigQueryUtils(key_path)
 
-df = bigquery.run_query(
-    f"""
-    SELECT
-        *
-    FROM {project}.{dataset}.{table}
-    """
-)
-df.to_csv('./gold_main.csv') # Guardamos el csv para trabajar de forma más ágil con él
-
-
 def load_data():
-    """Cargamos los datos del CSV y eliminamos la primera columna."""
+    """Cargamos los datos desde un CSV si existe, o desde BigQuery si no."""
     data_path = str(os.environ['DATA_PATH'])
-    df = pd.read_csv(data_path)
-    return df.iloc[:, 1:]
-
+    
+    if os.path.exists(data_path):
+        # Si el archivo CSV existe, lo leemos y eliminamos la primera columna
+        df = pd.read_csv(data_path)
+        return df.iloc[:, 1:]
+    else:
+        # Si el archivo CSV no existe, nos conectamos a BigQuery y guardamos el archivo
+        print("El archivo CSV no existe. Conectando a BigQuery...")
+        
+        df = bigquery.run_query(
+            f"""
+            SELECT
+                *
+            FROM {project}.{dataset}.{table}
+            """
+        )
+        
+        # Guardamos el csv para trabajar de forma más ágil con él
+        df.to_csv(data_path, index=False)
+        return df
+        
 
 def select_sector_and_cluster(df):
     """Seleccionamos sector y cluster basados en inputs del usuario."""
