@@ -32,7 +32,7 @@ warnings.filterwarnings('ignore')
 
 
 # Cargamos las variables del archivo .env
-load_dotenv('variables.env')
+load_dotenv('./variables.env')
 
 # Conexión a BigQuery
 from google.cloud import bigquery
