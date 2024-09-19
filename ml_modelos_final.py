@@ -54,7 +54,7 @@ def load_data():
     data_path = str(os.environ['DATA_PATH'])
     
     if os.path.exists(data_path):
-        # Si el archivo CSV existe, lo leemos y eliminamos la primera columna
+        # Si el archivo CSV existe, lo cargamos
         df = pd.read_csv(data_path)
         return df
     else:
