@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elige el cluster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% extends "base.html" %}
+    
+    {% block title %}Cluster{% endblock %}
+    
+    {% block content %}
+    <div class="container">
+        <h1>Selecciona el cluster:</h1>
+        <form action="/resultados" method="POST">
+            <input type="hidden" name="sector" value="{{ sector }}">
+            <input type="hidden" name="problem" value="{{ problem }}">
+            <button type="submit" name="cluster" value="0">Cluster 0</button>
+            <button type="submit" name="cluster" value="1">Cluster 1</button>
+            <button type="submit" name="cluster" value="2">Cluster 2</button>
+            <button type="submit" name="cluster" value="3">Cluster 3</button>
+            <button type="submit" name="cluster" value="4">Cluster 4</button>
+            <button type="submit" name="cluster" value="5">Cluster 5</button>
+        </form>
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

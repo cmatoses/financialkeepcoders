@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acciones Seleccionadas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% extends "base.html" %}
+    
+    {% block title %}Resultados{% endblock %}
+    
+    {% block content %}
+    <div class="container">
+        <h1>Acciones Seleccionadas</h1>
+        <h2>Estos son los tickers que se han seleccionado:</h2>
+        <ul>
+            {% for ticker in tickers_random %}
+            <li>{{ ticker }}</li>
+            {% endfor %}
+        </ul>
+
+        <form action="/ver_backtesting" method="POST">
+            <input type="hidden" name="sector" value="{{ sector }}">
+            <input type="hidden" name="problem" value="{{ problem }}">
+            {% for ticker in tickers_random %}
+            <input type="hidden" name="tickers_random" value="{{ ticker }}">
+            {% endfor %}
+            <button type="submit">Ver Backtesting Basado en Predicciones</button>
+        </form>
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>
