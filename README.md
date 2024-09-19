@@ -120,9 +120,10 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
 
 ### Conclusiones
 
-- **Robustez del modelo**: Aunque los resultados no son impresionantes (malos para regresión y medios para clasificación), hemos visto que en base a esas predicciones podemos crear nuestra propia estrategia de inversión y que sea ganadora batiendo al benchmark. En la correcta combinación está el éxito.
-- **Evaluación realista**: Gracias a la validación walk-forward y el backtesting, el sistema ofrece una evaluación precisa de las predicciones en contextos de mercado reales.
-- **Flexibilidad**: El sistema permite la personalización del análisis financiero según sectores, clusters y tickers, facilitando su adaptabilidad a diferentes estrategias de inversión.
+- **Robustez del modelo**: A pesar de que los resultados en esta versión inicial no son destacables (resultados bajos en regresión y moderados en clasificación), hemos comprobado que es posible diseñar una estrategia de inversión basada en estas predicciones que pueda superar al benchmark. El éxito radica en la correcta combinación de las predicciones y la estrategia.
+- **Evaluación realista**: La implementación de la validación walk-forward, junto con el backtesting, permite que el sistema evalúe las predicciones de manera precisa en entornos de mercado reales, simulando condiciones auténticas y proporcionando una visión clara del rendimiento.
+- **Flexibilidad**: El sistema ofrece una gran capacidad de personalización, permitiendo ajustar el análisis financiero según sectores, clusters y tickers. Esto facilita la adaptación a distintas estrategias de inversión y necesidades del usuario.
+
 
 ### Limitaciones y futuras mejoras
 - **Costes de transacción y liquidez**: No se han tenido en cuenta comisiones y demás intereses de mercado.
