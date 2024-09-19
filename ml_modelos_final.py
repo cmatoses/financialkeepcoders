@@ -56,7 +56,7 @@ def load_data():
     if os.path.exists(data_path):
         # Si el archivo CSV existe, lo leemos y eliminamos la primera columna
         df = pd.read_csv(data_path)
-        return df.iloc[:, 1:]
+        return df
     else:
         # Si el archivo CSV no existe, nos conectamos a BigQuery y guardamos el archivo
         print("El archivo CSV no existe. Conectando a BigQuery...")
