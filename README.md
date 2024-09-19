@@ -137,7 +137,9 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
 
 ### Agradecimientos
 
-Gracias por todo. Ha sido un año lleno de aprendizajes y retos a cual más apasionante. ¡Ha sido genial!
+Gracias por todo. Ha sido un año lleno de aprendizajes y retos a cual más apasionante. 
+
+¡Ha sido genial!
 
 **Carles Matoses Miret**  
 **Sara Díaz-P. Martín**
