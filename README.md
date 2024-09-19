@@ -52,6 +52,7 @@ Si prefieres ejecutar la aplicación Flask, más abajo se especifica cómo.
 1. **Preprocesamiento de datos**
    - Carga de datos desde Google BigQuery o un archivo CSV local, según disponibilidad. Este es el directorio en Drive con el archivo "gold_main.csv" principal: [Enlace al archivo .csv](https://drive.google.com/drive/folders/1IdonUB38UQC8TSGIrdPwrMCv5eThVB5d?usp=sharing)
 Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQuery, el código comprobará si el archivo está en la carpeta o no.
+**NOTA IMPORTANTE**: Al hacer este repositorio público, las credenciales (bigquery_credentials.json) de la carpeta conf no funcionan por motivos de seguridad. Tenemos en local el archivo válido con las credenciales para poder conectarse a BigQuery.
 **Si se decide descargar este .csv, solo con clonar el repositorio e instalar las dependencias, se puede ejecutar sin problemas el archivo ml_modelos_final.py o la aplicación Flask.**
    - Filtrado de tickers por volumen, sector y cluster.
    - Normalización y escalado de las características mediante `MinMaxScaler`.
