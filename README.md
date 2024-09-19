@@ -52,6 +52,7 @@ Si prefieres ejecutar la aplicación Flask, más abajo se especifica cómo.
 1. **Preprocesamiento de datos**
    - Carga de datos desde Google BigQuery o un archivo CSV local, según disponibilidad. Este es el directorio en Drive con el archivo .csv principal: [Enlace al archivo .csv](https://drive.google.com/drive/folders/1IdonUB38UQC8TSGIrdPwrMCv5eThVB5d?usp=sharing)
 Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQuery, el código comprobará si el archivo está en la carpeta o no.
+**Si se decide descargar este .csv, solo con clonar el repositorio e instalar las dependencias, se puede ejecutar sin problemas el archivo ml_modelos_final.py o la aplicación Flask.**
    - Filtrado de tickers por volumen, sector y cluster.
    - Normalización y escalado de las características mediante `MinMaxScaler`.
 
@@ -88,30 +89,32 @@ Esto agiliza la descarga de datos, pero podemos conectarnos directamente a BigQu
       - Correr los modelos predictivos de manera sencilla, facilitando la integración de este sistema con otras aplicaciones o procesos.
       - Acceder a los resultados del backtesting y las predicciones, obteniendo el mejor modelo y la predicción para el día siguiente.
 
-#### Cómo ejecutar la aplicación Flask
+   #### Cómo ejecutar la aplicación Flask
+   
+   1. **Clonar el repositorio**:
+      ```bash
+      git clone https://github.com/usuario/financialkeepcoders.git
+      cd financialkeepcoders
+      cd financial_keepcoders_app
+      ```
+   2. **Instalar las dependencias en el entorno virtual**:
+      ```bash
+      pip install -r requirements_flask.txt
+      ```
+   3. **Configurar las variables de entorno**:
+   Crea un archivo "variables_flask.env" en el directorio raíz del proyecto y configura las siguientes variables:
+   - DATA_PATH: Ruta del archivo CSV local para los datos financieros que se indica más arriba. (Si no lo tienes la aplicación se conectará directamente a BigQuery para descargarlo, tardará un poco más).
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/usuario/financialkeepcoders.git
-   cd financialkeepcoders
-   cd financial_keepcoders_app
-   ```
-2. **Instalar las dependencias en el entorno virtual**:
-   ```bash
-   pip install -r requirements_flask.txt
-   ```
-3. **Configurar las variables de entorno**:
-Crea un archivo "variables_flask.env" en el directorio raíz del proyecto y configura las siguientes variables:
-- DATA_PATH: Ruta del archivo CSV local para los datos financieros. (Si no lo tienes la aplicación se conectará directamente a BigQuery para descargarlo, tardará un poco más).
-
-4. **Ejecutar la aplicación Flask**:
-Inicia la aplicación Flask desde el archivo principal app.py:
-   ```bash
-   python app.py
-   ```
-5. **Acceder a la aplicación**:
-Una vez que Flask esté en funcionamiento, podrás acceder a la aplicación en tu navegador en (http://localhost:5000) o interactuar con la API para obtener predicciones y ejecutar análisis financieros.
-
+   
+   4. **Ejecutar la aplicación Flask**:
+   Inicia la aplicación Flask desde el archivo principal app.py:
+      ```bash
+      python app.py
+      ```
+      
+   5. **Acceder a la aplicación**:
+   Una vez que Flask esté en funcionamiento, podrás acceder a la aplicación en tu navegador en (http://localhost:5000) o interactuar con la API para obtener predicciones y ejecutar análisis financieros.
+   
 
 ---
 
